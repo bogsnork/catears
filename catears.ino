@@ -11,11 +11,12 @@ Servo servoTR;
 Servo servoBR;
 
 // constants won't change.
-const int button1Pin = 2;     // the number of the pushbutton pin
+const int button1Pin = 4;     // the number of the pushbutton pin
+const int button2Pin = 3;
 
 // variables will change:
-int button1State = 0;         // variable for reading the pushbutton status
-
+int button1State = 0;        // variable for reading the pushbutton status
+int button2State = 0;
 
 // twelve servo objects can be created on most boards
 
@@ -33,35 +34,78 @@ void setup() {
 
   // initialize the pushbutton pin as an input:
   pinMode(button1Pin, INPUT);
+  pinMode(button2Pin, INPUT);
+
+  // initialize builtin LED as output
+  pinMode(LED_BUILTIN, OUTPUT);
+
 }
 
 void loop() {
 
   // read the state of the pushbutton value:
-    button1State = digitalRead(button1Pin);
+  button1State = digitalRead(button1Pin);
+  button2State = digitalRead(button2Pin);
 
   // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-    if (button1State == HIGH) {
+  if (button1State == HIGH) {
 
-  //carry out a servo maneuvre for Bottom Left servo
-  for (posBL = 0; posBL <= 180; posBL += 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-    servoBL.write(posBL);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
+    // flash light to confirm button press
+    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(1000);                       // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+
+
+    //carry out a servo maneuvre for Top Left servo
+    for (posTL = 60; posTL <= 180; posTL += 1) {
+      servoTL.write(posTL);
+    }
+    for (posTL = 180; posTL >= 60; posTL -= 1) {
+      servoTL.write(posTL);
+      delay(15);
+    }
+
+    //carry out a servo maneuvre for Bottom Left servo
+    for (posBL = 80; posBL <= 180; posBL += 1) { // goes from 0 degrees to 180 degrees
+      // in steps of 1 degree
+      servoBL.write(posBL);              // tell servo to go to position in variable 'pos'
+      delay(15);                       // waits 15ms for the servo to reach the position
+    }
+    for (posBL = 180; posBL >= 80; posBL -= 1) { // goes from 180 degrees to 0 degrees
+      servoBL.write(posBL);              // tell servo to go to position in variable 'pos'
+      delay(15);                       // waits 15ms for the servo to reach the position
+    }
+
   }
-  for (posBL = 180; posBL >= 0; posBL -= 1) { // goes from 180 degrees to 0 degrees
-    servoBL.write(posBL);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
+  else if (button2State = HIGH) {
+    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(1000);                       // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+
+    for (posTR = 60; posTR <= 0; posTR -= 1) {
+      servoTR.write(posTR);
+      delay(15);
+    }
+    for (posTR = 0; posTR >= 60; posTR += 1) {
+      servoTR.write(posTR);
+      delay(15);
+    }
+
+    //carry out a servo maneuvre for Bottom Right servo
+    for (posBR = 80; posBR <= 0; posBR -= 1) { // goes from 0 degrees to 180 degrees
+      // in steps of 1 degree
+      servoBR.write(posBR);              // tell servo to go to position in variable 'pos'
+      delay(15);                       // waits 15ms for the servo to reach the position
+    }
+    for (posBR = 0; posBR >= 80; posBR += 1) { // goes from 180 degrees to 0 degrees
+      servoBR.write(posBR);              // tell servo to go to position in variable 'pos'
+      delay(15);                       // waits 15ms for the servo to reach the position
+    }
   }
 
-  //carry out a servo maneuvre for Top Left servo
-  for (posTL = 0; posTL <= 180; posTL += 1) { 
-    servoTL.write(posTL);              
-    delay(15);                       
-  }
-  for (posTL = 180; posTL >= 0; posTL -= 1) { 
-    servoTL.write(posTL);              
-    delay(15);                       
-  }
- }
+//  else {
+//    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+//    delay(250);                       // wait for a second
+//    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+//  }
 }

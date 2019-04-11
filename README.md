@@ -12,3 +12,5 @@ Currently the sketch catears.ino does only 2 things:
 - on button 2 press, right ear servos do a routine
 
 Button 2 press doesn't work at the moment.  
+
+### see wiki for more: https://github.com/bogsnork/catears/wiki

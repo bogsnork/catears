@@ -77,6 +77,19 @@ void loop() {
     }
 
   }
+   /* I think what you are doing here is fine, I would be tempted here to us "else if" for putting servos relating to button1state to
+   some other position if == LOW. Eg. your return positions when the pin goes low could be put in the else if rather than the whole
+   sequensce running on one button push perhaps.
+   Then use a new "if" statement to determine state for button2state.
+   I would be tempted, rather than write each action here for each button push, to build separte functions for the control of the
+   servos TL, BL,TR, BR, which were passed variables from the button pushing code. Should half the ammount
+   of overall code and allow you to write more complex senarios for multiple button pushes more easily. Build these below where
+   void loop(); finishes and then call them form in the Void loop(); part.
+   some stuff on the internet about it such as this http://forum.arduino.cc/index.php?topic=1881.0
+      
+   */
+   
+   
   else if (button2State == HIGH) {
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
     delay(1000);                       // wait for a second

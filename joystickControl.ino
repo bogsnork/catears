@@ -1,10 +1,10 @@
-#include <Servo.h> //Servos
+#include <Servo.h> //Servos library
 
 
 Servo Servo_X; //Servo object
 Servo Servo_Y; //Servo object
 
-const int PIN_Joystick_X_In = A0 ;
+const int PIN_Joystick_X_In = A0 ; //joystick input from analogue pins
 const int PIN_Joystick_Y_In = A1 ;
 
 int Val_X,Val_Y; //Stores the values to set the servo
